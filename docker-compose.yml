@@ -28,4 +28,4 @@ services:
     volumes:
       - /srv/letsencrypt-certs:/etc/letsencrypt
       - /srv/letsencrypt-challenge:/data/letsencrypt
-    command: certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org --agree-tos -m info@czeps.org --staging --no-eff-email
+    command: certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org --agree-tos -m info@czeps.org --no-eff-email
