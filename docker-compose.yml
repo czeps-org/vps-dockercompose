@@ -1,59 +1,9 @@
 version: "3.3"
 # lsd.czeps.org docker-compose.yml
 # made by brozkeff, martin.malec@czeps.org
-# version 02 September 2017
+# version 02 September 2017, temporarily removed proxy to make dokuwiki directly accessible
 
 services:
-  #apache:
-    ## ORIGINAL RUN COMMAND:
-    ## sudo docker run -d -p 80:80 -p 443:443 \
-    ## -v /etc/apache-persistence/vhosts:/bitnami/apache/conf/vhosts \
-    ## -v /var/www:/app bitnami/apache:latest
-    #  image: bitnami/apache:latest
-    #  volumes:
-    #    - /etc/apache-persistence/vhosts:/bitnami/apache/conf/vhosts
-    #    - /var/www:/app
-
-  nginx-proxy:
-    ## ORIGINAL RUN COMMAND:
-    ## docker run -d -p 80:80 -p 443:443 \
-    ## -v /etc/docker-letsencrypt-certs:/etc/nginx/certs \
-    ## -v /etc/nginx/vhost.d -v /usr/share/nginx/html \
-    ## -v /var/run/docker.sock:/tmp/docker.sock:ro \
-    ## --label com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true \
-    ## jwilder/nginx-proxy
-
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
-    volumes:
-      - /docker-letsencrypt-certs:/etc/nginx/certs:ro
-      #- /srv/nginxvhostd:/etc/nginx/vhost.d
-      #- /srv/nginx:/etc/nginx
-      #- /srv/nginxhtml:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
-    ports:
-      - "80:80"
-      - "443:443"
-
-  #letsencrypt-nginx-proxy-companion:
-    ## ORIGINAL RUN COMMAND:
-    ## docker run -d -v /docker-letsencrypt-certs:/etc/nginx/certs:rw \
-    ## -v /var/run/docker.sock:/var/run/docker.sock:ro \
-    ## --volumes-from nginx-proxy
-    ## jrcs/letsencrypt-nginx-proxy-companion
-  #  image: jrcs/letsencrypt-nginx-proxy-companion
-  #  container_name: letsencrypt-nginx-proxy-companion
-  #  volumes:
-  #    - /docker-letsencrypt-certs:/etc/nginx/certs:rw
-      #- /srv/nginxvhostd:/etc/nginx/vhost.d
-      #- /srv/nginx:/etc/nginx
-      #- /srv/nginxhtml:/usr/share/nginx/html
-  #    - /var/run/docker.sock:/var/run/docker.sock:ro
-  #  depends_on:
-  #    - nginx-proxy
-
   dokuwiki:
     ## ORIGINAL RUN COMMAND:
     ## sudo docker run -d --expose=80 --volume /srv/bitnami-dokuwiki/dokuwiki-persistence:/bitnami/dokuwiki --volume /srv/bitnami-dokuwiki/apache-persistence:/bitnami/apache --volume /srv/bitnami-dokuwiki/php-persistence:/bitnami/php -e "CERT_NAME=wiki.czeps.org" -e "VIRTUAL_HOST=wiki.czeps.org" -e "LETSENCRYPT_HOST=wiki.czeps.org" -e "LETSENCRYPT_EMAIL=info@czeps.org"  --name dokuwiki bitnami/dokuwiki:latest
@@ -71,6 +21,4 @@ services:
       - "80"
     ports:
       - "80:80"
-    # depends_on:
-    #  - nginx-proxy
-    #  - letsencrypt-nginx-proxy-companion
+      - "443:443"
