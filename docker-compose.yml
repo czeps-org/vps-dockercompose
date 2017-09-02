@@ -30,11 +30,10 @@ services:
     ##   certonly \
     ##   --webroot --webroot-path=/data/letsencrypt \
     ##   -d example.com -d www.example.com
-    certbot:
-      image: deliverous/certbot
-      container_name: certbot
-      volumes:
-        - /src/letsencrypt-certs:/etc/letsencrypt
-        - /src/letsencrypt-challenge:/data/letsencrypt
-      command: certbot certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org
-      
+  certbot:
+    image: deliverous/certbot
+    container_name: certbot
+    volumes:
+      - /src/letsencrypt-certs:/etc/letsencrypt
+      - /src/letsencrypt-challenge:/data/letsencrypt
+    command: certbot certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org
