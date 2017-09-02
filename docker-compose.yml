@@ -22,18 +22,10 @@ services:
     ports:
       - "8080:80"
 
-    ## ORIGINAL RUN COMMAND:
-    ## docker run -it --rm \
-    ##   -v certs:/etc/letsencrypt \
-    ##  -v certs-data:/data/letsencrypt \
-    ##   deliverous/certbot \
-    ##   certonly \
-    ##   --webroot --webroot-path=/data/letsencrypt \
-    ##   -d example.com -d www.example.com
   certbot:
     image: deliverous/certbot
     container_name: certbot
     volumes:
-      - /src/letsencrypt-certs:/etc/letsencrypt
-      - /src/letsencrypt-challenge:/data/letsencrypt
-    command: certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org
+      - /srv/letsencrypt-certs:/etc/letsencrypt
+      - /srv/letsencrypt-challenge:/data/letsencrypt
+    command: certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org --agree-tos -m info@czeps.org --staging
