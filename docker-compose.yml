@@ -38,6 +38,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      - dokuwiki
 
   letsencrypt-nginx-proxy-companion:
     ## ORIGINAL RUN COMMAND:
@@ -73,5 +75,3 @@ services:
       - LETSENCRYPT_EMAIL=info@czeps.org
     expose:
       - "80"
-    depends_on:
-      - nginx-proxy
