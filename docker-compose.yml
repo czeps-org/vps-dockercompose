@@ -26,7 +26,7 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     volumes:
-      - /etc/docker-letsencrypt-certs:/etc/nginx/certs
+      - /docker-letsencrypt-certs:/etc/nginx/certs:ro
       - /etc/nginx/vhost.d -v /usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
@@ -45,8 +45,9 @@ services:
     container_name: letsencrypt-nginx-proxy-companion
     volumes:
       - /docker-letsencrypt-certs:/etc/nginx/certs:rw
+      - /etc/nginx/vhost.d -v /usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes_from: nginx-proxy
+    # volumes_from: nginx-proxy
     depends_on:
       - nginx-proxy
       - dokuwiki
