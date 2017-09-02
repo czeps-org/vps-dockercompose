@@ -28,8 +28,8 @@ services:
     volumes:
       - /docker-letsencrypt-certs:/etc/nginx/certs:ro
       #- /srv/nginxvhostd:/etc/nginx/vhost.d
-      - /srv/nginx:/etc/nginx
-      - /srv/nginxhtml:/usr/share/nginx/html
+      #- /srv/nginx:/etc/nginx
+      #- /srv/nginxhtml:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
@@ -37,22 +37,22 @@ services:
       - "80:80"
       - "443:443"
 
-  letsencrypt-nginx-proxy-companion:
+  #letsencrypt-nginx-proxy-companion:
     ## ORIGINAL RUN COMMAND:
     ## docker run -d -v /docker-letsencrypt-certs:/etc/nginx/certs:rw \
     ## -v /var/run/docker.sock:/var/run/docker.sock:ro \
     ## --volumes-from nginx-proxy
     ## jrcs/letsencrypt-nginx-proxy-companion
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt-nginx-proxy-companion
-    volumes:
-      - /docker-letsencrypt-certs:/etc/nginx/certs:rw
+  #  image: jrcs/letsencrypt-nginx-proxy-companion
+  #  container_name: letsencrypt-nginx-proxy-companion
+  #  volumes:
+  #    - /docker-letsencrypt-certs:/etc/nginx/certs:rw
       #- /srv/nginxvhostd:/etc/nginx/vhost.d
-      - /srv/nginx:/etc/nginx
-      - /srv/nginxhtml:/usr/share/nginx/html
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - nginx-proxy
+      #- /srv/nginx:/etc/nginx
+      #- /srv/nginxhtml:/usr/share/nginx/html
+  #    - /var/run/docker.sock:/var/run/docker.sock:ro
+  #  depends_on:
+  #    - nginx-proxy
 
   dokuwiki:
     ## ORIGINAL RUN COMMAND:
