@@ -70,7 +70,7 @@ services:
     expose:
       - "80"
     ports:
-      - "10080:80"
+      - "80:80"
     depends_on:
-      - nginx-proxy
+    #  - nginx-proxy
     #  - letsencrypt-nginx-proxy-companion
