@@ -38,8 +38,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - dokuwiki
 
   letsencrypt-nginx-proxy-companion:
     ## ORIGINAL RUN COMMAND:
@@ -54,10 +52,8 @@ services:
       - nginxvhostd:/etc/nginx/vhost.d
       - nginxhtml:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    # volumes_from: nginx-proxy
     depends_on:
       - nginx-proxy
-      - dokuwiki
 
   dokuwiki:
     ## ORIGINAL RUN COMMAND:
@@ -66,12 +62,14 @@ services:
     image: bitnami/dokuwiki:latest
     container_name: dokuwiki
     volumes:
-      - /srv/bitnami-dokuwiki/dokuwiki-persistence:/bitnami/dokuwiki
-      #  - /srv/bitnami-dokuwiki/apache-persistence:/bitnami/apache
-      #  - /srv/bitnami-dokuwiki/php-persistence:/bitnami/php
+      - /srv/bitnami-dokuwiki:/bitnami
+
     environment:
       - VIRTUAL_HOST=wiki.czeps.org
       - LETSENCRYPT_HOST=wiki.czeps.org
       - LETSENCRYPT_EMAIL=info@czeps.org
     expose:
       - "80"
+    depends_on:
+      - nginx-proxy
+      - letsencrypt-nginx-proxy-companion
