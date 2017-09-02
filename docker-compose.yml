@@ -65,8 +65,8 @@ services:
     container_name: dokuwiki
     volumes:
       - /srv/bitnami-dokuwiki/dokuwiki-persistence:/bitnami/dokuwiki
-      - /srv/bitnami-dokuwiki/apache-persistence:/bitnami/apache
-      - /srv/bitnami-dokuwiki/php-persistence:/bitnami/php
+      #  - /srv/bitnami-dokuwiki/apache-persistence:/bitnami/apache
+      #  - /srv/bitnami-dokuwiki/php-persistence:/bitnami/php
     environment:
       - VIRTUAL_HOST=wiki.czeps.org
       - LETSENCRYPT_HOST=wiki.czeps.org
