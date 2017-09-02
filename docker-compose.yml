@@ -36,4 +36,4 @@ services:
     volumes:
       - /src/letsencrypt-certs:/etc/letsencrypt
       - /src/letsencrypt-challenge:/data/letsencrypt
-    command: certbot certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org
+    command: certonly --webroot --webroot-path=/data/letsencrypt -d wiki.czeps.org
