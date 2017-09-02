@@ -1,5 +1,5 @@
 version: "3.3"
-# lsd.czeps org docker-compose.yml
+# lsd.czeps.org docker-compose.yml
 # made by brozkeff, martin.malec@czeps.org
 # version 02 September 2017
 
@@ -24,7 +24,7 @@ services:
     ## jwilder/nginx-proxy
 
     image: jwilder/nginx-proxy
-    container-name: nginx-proxy
+    container_name: nginx-proxy
     volumes:
       - /etc/docker-letsencrypt-certs:/etc/nginx/certs
       - /etc/nginx/vhost.d -v /usr/share/nginx/html
@@ -42,11 +42,11 @@ services:
     ## --volumes-from nginx-proxy
     ## jrcs/letsencrypt-nginx-proxy-companion
     image: jrcs/letsencrypt-nginx-proxy-companion
-    container-name: letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx-proxy-companion
     volumes:
       - /docker-letsencrypt-certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes-from: nginx-proxy
+    volumes_from: nginx-proxy
     depends_on:
       - nginx-proxy
       - dokuwiki
@@ -56,7 +56,7 @@ services:
     ## sudo docker run -d --expose=80 --volume /srv/bitnami-dokuwiki/dokuwiki-persistence:/bitnami/dokuwiki --volume /srv/bitnami-dokuwiki/apache-persistence:/bitnami/apache --volume /srv/bitnami-dokuwiki/php-persistence:/bitnami/php -e "CERT_NAME=wiki.czeps.org" -e "VIRTUAL_HOST=wiki.czeps.org" -e "LETSENCRYPT_HOST=wiki.czeps.org" -e "LETSENCRYPT_EMAIL=info@czeps.org"  --name dokuwiki bitnami/dokuwiki:latest
 
     image: bitnami/dokuwiki:latest
-    container-name: dokuwiki
+    container_name: dokuwiki
     volumes:
       - /srv/bitnami-dokuwiki/dokuwiki-persistence:/bitnami/dokuwiki
       - /srv/bitnami-dokuwiki/apache-persistence:/bitnami/apache
@@ -69,4 +69,3 @@ services:
       - "80"
     depends_on:
       - nginx-proxy
-      
