@@ -48,7 +48,7 @@ services:
       - /docker-letsencrypt-certs:/etc/nginx/certs:rw
       - /srv/nginxvhostd:/etc/nginx/vhost.d
       - /srv/nginxhtml:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - nginx-proxy
 
